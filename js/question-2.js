@@ -33,25 +33,65 @@ const url = "https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=
 
 const resultsContainer = document.querySelector(".results")
 
-async function getAPIKey() {
+fetch(url)
+    .then(function(response){
+        console.log(response);
+        return response.json();
+    })
+    .then(function(data) {
+        console.log(data);
+        createHTML(data)
+    })
+    .catch(function(error) {
+        console.log(error);
+        resultsContainer.innerHTML = displayError("An error has occurred when calling the API")
+    })
 
+function createHTML(results) {
+    const facts = results.all;
 
-    const responce = await fetch(url);
+    resultsContainer.innerHTML = "";
 
-    const results = await responce.json();
+        for(let i = 0; i < facts.length; i++) {
 
-    const info = results.all;
+            if (i === 8) {
+                break;
+            }
 
-    for (let i = 0; i < info.length; i++) {
-        console.log(info[i].text)
-
-        if(i === 8) {
-            break;
+            resultsContainer.innerHTML += `<div class="result">${facts[i].text}</div>`;
         }
-
-        //resultsContainer.innerHTML += `<div class="results">${info[i].text}</div>`;
-
-    }
 }
 
-getAPIKey()
+
+
+
+
+
+
+async function getAPIKey() {
+    try {
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        const facts = data.all;
+
+        resultsContainer.innerHTML = "";
+
+        for (let i = 0; i < facts.length; i++) {
+
+            if (i === 8) {
+                break;
+            }
+
+            resultsContainer.innerHTML += `<div class="results">${facts[i].text}</div>`;
+        }
+
+        }catch (error) {
+            resultsContainer.innerHTML = ("An Error occurred when calling the API");
+        }
+}
+
+
+//I cannot figure out why the API won't display any information, or remember how you display properties in the HTML (Name, rating, number of tags).
+
