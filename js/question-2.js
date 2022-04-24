@@ -44,7 +44,7 @@ fetch(url)
     })
     .catch(function(error) {
         console.log(error);
-        resultsContainer.innerHTML = displayError("An error has occurred when calling the API")
+        resultsContainer.innerHTML = ("An error has occurred when calling the API")
     })
 
 function createHTML(results) {
@@ -53,6 +53,9 @@ function createHTML(results) {
     resultsContainer.innerHTML = "";
 
         for(let i = 0; i < facts.length; i++) {
+            console.log(facts[i].name)
+            console.log(facts[i].ratings)
+            console.log(facts[i].tags)
 
             if (i === 8) {
                 break;
@@ -62,7 +65,7 @@ function createHTML(results) {
         }
 }
 
-
+createHTML()
 
 
 
@@ -79,6 +82,9 @@ async function getAPIKey() {
         resultsContainer.innerHTML = "";
 
         for (let i = 0; i < facts.length; i++) {
+            console.log(facts[i].name)
+            console.log(facts[i].ratings)
+            console.log(facts[i].tags)
 
             if (i === 8) {
                 break;
