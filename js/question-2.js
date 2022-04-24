@@ -31,19 +31,26 @@ Be sure to arrange all file types appropriately, consult the repos from the less
 
 const url = "https://api.rawg.io/api/games?dates=2019-01-01,2019-12-31&ordering=rating&key=ea0d4377ace1473a94f363cca08e5cbf"
 
+const resultsContainer = document.querySelector(".results")
+
 async function getAPIKey() {
+
+
     const responce = await fetch(url);
 
     const results = await responce.json();
 
-    const data = results.all;
+    const info = results.all;
 
-    for (let i = 0; i < data.length; i++) {
-        console.log(data[i].text)
+    for (let i = 0; i < info.length; i++) {
+        console.log(info[i].text)
 
         if(i === 8) {
             break;
         }
+
+        //resultsContainer.innerHTML += `<div class="results">${info[i].text}</div>`;
+
     }
 }
 
