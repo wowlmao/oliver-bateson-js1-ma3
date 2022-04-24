@@ -8,3 +8,5 @@ function getRemainder (a,b) {
 }
 */
 
+
+const remainder = (a,b) => a % b;
